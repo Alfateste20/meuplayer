@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e0e11">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Músicas">
+<title>Minhas Músicas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section id="login" class="login hidden">
+  <div class="login-card">
+    <img src="icons/icon-192.png" alt="" class="login-logo">
+    <h1 id="loginTitle">Minhas Músicas</h1>
+    <p class="muted">Suas músicas, direto da sua pasta do OneDrive.</p>
+    <div id="loginMsg" class="login-msg hidden"></div>
+    <button id="btnLogin" class="btn primary big"><span data-icon="ms"></span>Entrar com Microsoft</button>
+    <p class="tiny muted">O acesso fica só entre este aparelho e o seu OneDrive.</p>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <button id="btnBack" class="icon-btn hidden" aria-label="Voltar" data-icon="back"></button>
+    <h1 id="viewTitle">Músicas</h1>
+    <div class="topbar-actions">
+      <button id="btnRefresh" class="icon-btn" aria-label="Atualizar" data-icon="refresh"></button>
+      <button id="btnSettings" class="icon-btn" aria-label="Configurações" data-icon="settings"></button>
+    </div>
+  </header>
+
+  <div class="searchbar">
+    <span data-icon="search" class="search-ico"></span>
+    <input id="search" type="search" placeholder="Buscar música, artista ou álbum" autocomplete="off" autocorrect="off" spellcheck="false">
+  </div>
+
+  <div id="scanBar" class="scanbar hidden"><span class="spinner"></span><span id="scanText">Procurando músicas…</span></div>
+
+  <main id="content"></main>
+
+  <!-- mini player -->
+  <div id="mini" class="mini hidden">
+    <div class="mini-progress"><div id="miniBar"></div></div>
+    <div class="mini-body" id="miniOpen">
+      <div class="art sm" id="miniArt"></div>
+      <div class="mini-text">
+        <div id="miniTitle" class="ellipsis strong"></div>
+        <div id="miniArtist" class="ellipsis muted small"></div>
+      </div>
+      <button id="miniPlay" class="icon-btn" aria-label="Tocar/Pausar" data-icon="play"></button>
+      <button id="miniNext" class="icon-btn" aria-label="Próxima" data-icon="next"></button>
+    </div>
+  </div>
+
+  <nav class="tabbar">
+    <button data-tab="songs" class="active"><span data-icon="music"></span>Músicas</button>
+    <button data-tab="artists"><span data-icon="artist"></span>Artistas</button>
+    <button data-tab="albums"><span data-icon="album"></span>Álbuns</button>
+    <button data-tab="playlists"><span data-icon="playlist"></span>Playlists</button>
+  </nav>
+</div>
+
+<!-- ============ PLAYER COMPLETO ============ -->
+<section id="full" class="full" aria-hidden="true">
+  <div class="full-bg" id="fullBg"></div>
+  <div class="full-inner">
+    <div class="full-top">
+      <button id="fClose" class="icon-btn" aria-label="Fechar" data-icon="down"></button>
+      <div class="small muted center" id="fSource">Tocando</div>
+      <button id="fMore" class="icon-btn" aria-label="Mais opções" data-icon="more"></button>
+    </div>
+    <div class="full-art-wrap"><div class="art xl" id="fArt"></div></div>
+    <div class="full-meta">
+      <div class="full-meta-text">
+        <div id="fTitle" class="ellipsis full-title"></div>
+        <div id="fArtist" class="ellipsis muted"></div>
+      </div>
+      <button id="fFav" class="icon-btn" aria-label="Favoritar" data-icon="heart"></button>
+    </div>
+    <div class="seek">
+      <input id="fSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição">
+      <div class="seek-times small muted"><span id="fCur">0:00</span><span id="fDur">0:00</span></div>
+    </div>
+    <div class="controls">
+      <button id="fShuffle" class="icon-btn" aria-label="Aleatório" data-icon="shuffle"></button>
+      <button id="fPrev" class="icon-btn lg" aria-label="Anterior" data-icon="prev"></button>
+      <button id="fPlay" class="play-btn" aria-label="Tocar/Pausar" data-icon="play"></button>
+      <button id="fNext" class="icon-btn lg" aria-label="Próxima" data-icon="next"></button>
+      <button id="fRepeat" class="icon-btn" aria-label="Repetir" data-icon="repeat"></button>
+    </div>
+    <div class="full-bottom">
+      <button id="fQueue" class="pill"><span data-icon="queue"></span>Fila</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOLHA DE AÇÕES ============ -->
+<div id="sheetWrap" class="sheet-wrap hidden">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js" defer></script>
+<script src="js/auth.js"></script>
+<script src="js/onedrive.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
